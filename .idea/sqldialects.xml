@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/1/find_and_delete_duplicates.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/1/find_duplicates.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/2/main.py" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/2/reload_loan_holiday_info.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/prototypes/DATABASE_DUMP.sql" dialect="PostgreSQL" />
+  </component>
+</project>
