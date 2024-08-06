@@ -1,5 +1,6 @@
 WITH CTE AS (
     SELECT
+        ctid,
         client_rk,
         effective_from_date,
         ROW_NUMBER() OVER (PARTITION BY client_rk, effective_from_date ORDER BY client_rk, effective_from_date) AS row_num
@@ -7,8 +8,8 @@ WITH CTE AS (
         dm.client
 )
 DELETE FROM dm.client
-WHERE (client_rk, effective_from_date) IN (
-    SELECT client_rk, effective_from_date
+WHERE ctid IN (
+    SELECT ctid
     FROM CTE
     WHERE row_num > 1
 );
