@@ -46,13 +46,6 @@ def check_missing_data(engine, script_path):
     return missing_dates_df
 
 
-def execute_sql_script(engine, script_path):
-    with open(script_path, 'r', encoding='utf-8') as file:
-        query = file.read()
-    with engine.connect() as connection:
-        connection.execute(text(query))
-
-
 def main():
     engine = create_engine('postgresql+psycopg2://postgres:1234@localhost:5432/dwh')
 
@@ -67,13 +60,6 @@ def main():
     deal_df['effective_from_date'] = pd.to_datetime(deal_df['effective_from_date'], format='%Y-%m-%d', errors='coerce')
     deal_df['effective_to_date'] = pd.to_datetime(deal_df['effective_to_date'], format='%Y-%m-%d', errors='coerce')
     upload_to_database(deal_df, 'deal_info', 'rd', engine)
-
-    missing_data_df = check_missing_data(engine, 'missing_data.sql')
-    if not missing_data_df.empty:
-        script_path = 'reload_loan_holiday_info.sql'
-        execute_sql_script(engine, script_path)
-    else:
-        print("No need to reload data.")
 
 
 if __name__ == "__main__":
