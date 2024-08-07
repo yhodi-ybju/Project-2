@@ -36,16 +36,6 @@ def upload_to_database(df, table_name, schema, engine):
         df.to_sql(table_name, con=connection, schema=schema, if_exists="replace", index=False)
 
 
-def check_missing_data(engine, script_path):
-    with open(script_path, 'r', encoding='utf-8') as file:
-        missing_data_query = file.read()
-    with engine.connect() as connection:
-        result = connection.execute(text(missing_data_query))
-        missing_dates_df = pd.DataFrame(result.fetchall(), columns=result.keys())
-    print(missing_dates_df)
-    return missing_dates_df
-
-
 def main():
     engine = create_engine('postgresql+psycopg2://postgres:1234@localhost:5432/dwh')
 
